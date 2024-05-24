@@ -6,9 +6,9 @@ pipeline {
         maven 'maven3'
     }
     
-    // environment {
-    //     SCANNER_HOME=tool 'sonar-scanner'
-    // }
+    environment {
+        SCANNER_HOME=tool 'sonar-scanner'
+    }
     
     stages{
         
@@ -30,16 +30,16 @@ pipeline {
             }
         }
         
-        // stage("Sonarqube Analysis "){
-        //     steps{
-        //         withSonarQubeEnv('sonar-server') {
-        //             sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Petclinic \
-        //             -Dsonar.java.binaries=. \
-        //             -Dsonar.projectKey=Petclinic '''
+        stage("Sonarqube Analysis "){
+            steps{
+                withSonarQubeEnv('sonar-server') {
+                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Petclinic \
+                    -Dsonar.java.binaries=. \
+                    -Dsonar.projectKey=Petclinic '''
     
-        //         }
-        //     }
-        // }
+                }
+            }
+        }
         
         // stage("OWASP Dependency Check"){
         //     steps{
