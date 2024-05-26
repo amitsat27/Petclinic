@@ -75,6 +75,14 @@ pipeline {
         //         sh " trivy image adijaiswal/pet-clinic123:latest"
         //     }
         // }
+
+         stage("Deploy to Nexus Repo"){
+            steps{
+                configFileProvider([configFile(fileId: 'c788f213-e4cc-4faf-86fb-1b556c729a84', variable: 'mavensettings')]) {
+                    sh 'mvn -s $mavensettings clean deploy'
+                }
+            }
+        }
         
         stage("Deploy To Tomcat"){
             steps{
